@@ -66,11 +66,7 @@ export const sendEmail = async (emailData: EmailData) => {
     throw new Error("Email addresses not configured");
   }
 
-  const sendEmailCommand = createSendEmailCommand(
-    toAddress,
-    fromAddress,
-    emailData
-  );
+  const sendEmailCommand = createSendEmailCommand(toAddress, fromAddress, emailData);
 
   try {
     return await sesClient.send(sendEmailCommand);

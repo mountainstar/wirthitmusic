@@ -12,8 +12,7 @@ const PLACEHOLDERS = {
   merch: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
   vinyl: "https://images.unsplash.com/photo-1611339555312-e607a835f912?w=800&q=80",
   tour: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80",
-  discography:
-    "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80",
+  discography: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80",
 };
 
 const sections = [

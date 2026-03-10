@@ -53,12 +53,12 @@ export default function About() {
               The home of all things Wirth It Music
             </Typography>
             <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
-              News, tour dates and music. This is the digital hub for the sound
-              — a place to get lost in the energy and excitement of the rave.
+              News, tour dates and music. This is the digital hub for the sound — a place
+              to get lost in the energy and excitement of the rave.
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Iconic sounds and a lasting legacy. From the studio to the stage,
-              the mission is simple: move the crowd and keep the party alive.
+              Iconic sounds and a lasting legacy. From the studio to the stage, the
+              mission is simple: move the crowd and keep the party alive.
             </Typography>
           </Box>
         </Box>

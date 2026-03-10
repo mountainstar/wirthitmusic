@@ -23,8 +23,7 @@ export default function Hero() {
         sx={{
           position: "absolute",
           inset: 0,
-          background:
-            "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.6) 100%)",
+          background: "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.6) 100%)",
           pointerEvents: "none",
         }}
       />
@@ -86,8 +85,8 @@ export default function Hero() {
             textShadow: "0 1px 12px rgba(0,0,0,0.6)",
           }}
         >
-          “The rave was built on energy and the excitement of it all — get lost
-          in the sound.”
+          “The rave was built on energy and the excitement of it all — get lost in the
+          sound.”
         </Typography>
       </Box>
     ),

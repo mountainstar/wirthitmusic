@@ -1,1 +1,1 @@
-export { default } from './ParallaxBanner';
+export { default } from "./ParallaxBanner";

@@ -1,12 +1,5 @@
 import { useState } from "react";
-import {
-  Box,
-  Button,
-  Container,
-  TextField,
-  Typography,
-  Alert,
-} from "@mui/material";
+import { Box, Button, Container, TextField, Typography, Alert } from "@mui/material";
 
 export default function MailingList() {
   const [email, setEmail] = useState("");
