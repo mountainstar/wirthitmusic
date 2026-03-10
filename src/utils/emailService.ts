@@ -59,8 +59,8 @@ Message: ${emailData.message}
 };
 
 export const sendEmail = async (emailData: EmailData) => {
-  const toAddress = process.env.REACT_APP_SES_TO_EMAIL || "";
-  const fromAddress = process.env.REACT_APP_SES_FROM_EMAIL || "";
+  const toAddress = import.meta.env.VITE_SES_TO_EMAIL ?? "";
+  const fromAddress = import.meta.env.VITE_SES_FROM_EMAIL ?? "";
 
   if (!toAddress || !fromAddress) {
     throw new Error("Email addresses not configured");

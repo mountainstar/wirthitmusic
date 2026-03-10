@@ -104,7 +104,7 @@ const ContactForm: FC<IProps> = (props) => {
                 sx={{ display: "flex", justifyContent: "center" }}
               >
                 <ReCAPTCHA
-                  sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY || ""}
+                  sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY ?? ""}
                   onChange={(value: any) => {
                     setRecaptchaValue(value);
                   }}
