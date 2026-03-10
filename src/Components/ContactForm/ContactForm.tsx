@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import TextField from "../TextField";
+import { sendEmail } from "../../utils/emailService";
 
 interface IProps {}
 
@@ -25,13 +26,6 @@ const ContactForm: FC<IProps> = (props) => {
         resolver: yupResolver(schema),
     });
 
-    // You need a backend or a third-party service to send emails from a form.
-    // Here, we'll use Formspree as an example. You can sign up for a free account and get your form endpoint.
-    // Replace the endpoint below with your own Formspree endpoint.
-    // Alternatively, you can use EmailJS or another service.
-
-    const FORMSPREE_ENDPOINT = "https://formspree.io/f/xdoqzqzq"; // Replace with your Formspree endpoint
-
     const onSubmit = async (data: any) => {
         if (!recaptchaValue) {
             alert("Please verify you are not a robot");
@@ -42,30 +36,22 @@ const ContactForm: FC<IProps> = (props) => {
         setSubmitSuccess(false);
 
         try {
-            const response = await fetch(FORMSPREE_ENDPOINT, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                },
-                body: JSON.stringify({
-                    name: data.name,
-                    email: data.email,
-                    message: data.message,
-                    "g-recaptcha-response": recaptchaValue,
-                }),
+            const result = await sendEmail({
+                name: data.name,
+                email: data.email,
+                message: data.message,
             });
 
-            if (response.ok) {
+            if (result && !(result instanceof Error)) {
                 setSubmitSuccess(true);
                 reset();
                 setRecaptchaValue(null);
             } else {
-                const result = await response.json();
-                setSubmitError(result.error || "Failed to send message. Please try again later.");
+                setSubmitError("Failed to send message. Please try again later.");
             }
         } catch (error: any) {
-            setSubmitError("Failed to send message. Please try again later.");
+            console.error("Email sending error:", error);
+            setSubmitError(error.message || "Failed to send message. Please try again later.");
         } finally {
             setSubmitting(false);
         }
@@ -121,7 +107,7 @@ const ContactForm: FC<IProps> = (props) => {
                                 sx={{ display: "flex", justifyContent: "center" }}
                             >
                                 <ReCAPTCHA
-                                    sitekey={process.env.RECAPTCHA_SITE_KEY || ""}
+                                    sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY || ""}
                                     onChange={(value: any) => {
                                         setRecaptchaValue(value);
                                     }}

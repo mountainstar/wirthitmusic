@@ -1,15 +1,17 @@
-import * as React from 'react';
-import {Container} from '@mui/material';
-import Footer from '../Footer';
-import AppBarComponent from '../AppBar/AppBar';
-import ParallaxBannerComponent from '../ParallaxBanner';
+import type { ReactNode } from "react";
+import { Container } from "@mui/material";
+import Footer from "../Footer";
+import AppBar from "../AppBar";
+import Hero from "../Hero";
 
-export default function SimpleContainer({ children }: { children: React.ReactNode }) {
+type PageWrapperProps = { children: ReactNode };
+
+export default function PageWrapper({ children }: PageWrapperProps) {
   return (
     <>
-     <AppBarComponent />
-     <ParallaxBannerComponent />
-      <Container  maxWidth={false} >
+      <AppBar />
+      <Hero />
+      <Container maxWidth={false} disableGutters>
         {children}
       </Container>
       <Footer />

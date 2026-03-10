@@ -1,17 +1,16 @@
-import PageWrapper from '../Components/PageWrapper/PageWrapper';
-import { Divider, Typography } from '@mui/material';
-import About from '../About/About';
-import ContactForm from '../Components/ContactForm';
+import PageWrapper from "../Components/PageWrapper/PageWrapper";
+import About from "../Components/About";
+import SectionCards from "../Components/SectionCards";
+import MailingList from "../Components/MailingList";
+import ContactSection from "../Components/ContactSection";
 
-function Home() {
+export default function Home() {
   return (
-    <>    
     <PageWrapper>
       <About />
-      <ContactForm />
+      <SectionCards />
+      <MailingList />
+      <ContactSection />
     </PageWrapper>
-    </>
   );
 }
-
-export default Home;
