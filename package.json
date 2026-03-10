@@ -41,6 +41,7 @@
     "test": "vitest",
     "test:run": "vitest run",
     "test:ui": "vitest --ui",
+    "lint": "eslint src --ext .ts,.tsx && npm run format:check",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,css,md}\""
   },
@@ -66,6 +67,8 @@
   "devDependencies": {
     "@types/react-google-recaptcha": "^2.1.9",
     "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^8.57.0",
+    "eslint-config-react-app": "^7.0.1",
     "eslint-config-prettier": "^9.1.0",
     "jsdom": "^25.0.1",
     "prettier": "^3.3.3",
