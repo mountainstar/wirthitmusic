@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Tooltip } from "@mui/material";
 
 const FOOTER_LINKS = [
   { label: "About", href: "#about" },
@@ -83,19 +83,24 @@ export default function Footer() {
           }}
         >
           {SOCIAL_LINKS.map(({ label, href, viewBox, path }) => (
-            <Box
-              key={label}
-              component="a"
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={label}
-              sx={{ color: "text.primary", "&:hover": { color: "primary.main" } }}
-            >
-              <svg width={28} height={28} fill="currentColor" viewBox={viewBox}>
-                <path d={path} />
-              </svg>
-            </Box>
+            <Tooltip key={label} title={label}>
+              <Box
+                component="a"
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                sx={{
+                  color: "text.primary",
+                  "&:hover": { color: "primary.main" },
+                  display: "inline-flex",
+                }}
+              >
+                <svg width={28} height={28} fill="currentColor" viewBox={viewBox} aria-hidden>
+                  <path d={path} />
+                </svg>
+              </Box>
+            </Tooltip>
           ))}
         </Box>
       </Box>

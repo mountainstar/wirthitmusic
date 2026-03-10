@@ -43,7 +43,8 @@
     "test:ui": "vitest --ui",
     "lint": "eslint src --ext .ts,.tsx && npm run format:check",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,md}\"",
-    "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,css,md}\""
+    "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "logo:transparent": "node scripts/make-logo-transparent.mjs"
   },
   "eslintConfig": {
     "extends": [
@@ -66,6 +67,7 @@
   },
   "devDependencies": {
     "@types/react-google-recaptcha": "^2.1.9",
+    "sharp": "^0.33.5",
     "@vitejs/plugin-react": "^4.3.4",
     "eslint": "^8.57.0",
     "eslint-config-react-app": "^7.0.1",

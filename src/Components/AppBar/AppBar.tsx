@@ -4,6 +4,7 @@ import {
   Toolbar,
   Typography,
   IconButton,
+  Tooltip,
   Box,
   Drawer,
   List,
@@ -71,30 +72,40 @@ export default function AppBar() {
             px: { xs: 1, sm: 2 },
           }}
         >
-          <Typography
-            variant="h6"
+          <Box
             component="a"
             href="#"
             sx={{
-              fontFamily: '"Bebas Neue", "Roboto", sans-serif',
-              letterSpacing: "0.12em",
-              color: "inherit",
+              display: "flex",
+              alignItems: "center",
               textDecoration: "none",
+              color: "inherit",
             }}
           >
-            Wirth It Music
-          </Typography>
+            <Box
+              component="img"
+              src="/logo.png"
+              alt="Wirth It Music"
+              sx={{
+                height: { xs: 40, sm: 48 },
+                width: "auto",
+                display: "block",
+              }}
+            />
+          </Box>
 
           <Box sx={{ display: { xs: "none", md: "block" } }}>{navContent}</Box>
 
-          <IconButton
-            color="inherit"
-            aria-label="open menu"
-            onClick={handleDrawerToggle}
-            sx={{ display: { md: "none" } }}
-          >
-            <MenuIcon />
-          </IconButton>
+          <Tooltip title="Open menu">
+            <IconButton
+              color="inherit"
+              aria-label="open menu"
+              onClick={handleDrawerToggle}
+              sx={{ display: { md: "none" } }}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Tooltip>
         </Toolbar>
       </MuiAppBar>
 
@@ -115,9 +126,16 @@ export default function AppBar() {
         }}
       >
         <Box sx={{ py: 2, px: 2, display: "flex", justifyContent: "flex-end" }}>
-          <IconButton onClick={handleDrawerToggle} color="inherit" size="large">
-            <CloseIcon />
-          </IconButton>
+          <Tooltip title="Close menu">
+            <IconButton
+              onClick={handleDrawerToggle}
+              color="inherit"
+              size="large"
+              aria-label="close menu"
+            >
+              <CloseIcon />
+            </IconButton>
+          </Tooltip>
         </Box>
         <List>
           {NAV_LINKS.map(({ label, href }) => (
