@@ -50,7 +50,7 @@ export default function About() {
               About
             </Typography>
             <Typography variant="h4" sx={{ mb: 2, letterSpacing: "0.02em" }}>
-              The home of all things Wirth It Music
+              The home of all things Wirth_It Music
             </Typography>
             <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
               News, tour dates and music. This is the digital hub for the sound — a place

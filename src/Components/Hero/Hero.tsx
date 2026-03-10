@@ -71,7 +71,7 @@ export default function Hero() {
             textShadow: "0 2px 24px rgba(0,0,0,0.8)",
           }}
         >
-          Wirth It Music
+          Wirth_It Music
         </Typography>
         <Typography
           variant="h5"

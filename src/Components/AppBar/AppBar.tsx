@@ -85,7 +85,7 @@ export default function AppBar() {
             <Box
               component="img"
               src="/logo.png"
-              alt="Wirth It Music"
+              alt="Wirth_It Music"
               sx={{
                 height: { xs: 40, sm: 48 },
                 width: "auto",

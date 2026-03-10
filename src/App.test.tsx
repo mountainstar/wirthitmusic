@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import App from "./App";
 
 describe("App", () => {
-  it("renders the app with Wirth It Music branding", () => {
+  it("renders the app with Wirth_It Music branding", () => {
     render(<App />);
     const headings = screen.getAllByText(/wirth it music/i);
     expect(headings.length).toBeGreaterThan(0);
