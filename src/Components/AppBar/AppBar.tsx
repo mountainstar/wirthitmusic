@@ -1,59 +1,161 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import AdbIcon from '@mui/icons-material/Adb';
+import { useState } from "react";
+import {
+  AppBar as MuiAppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  Tooltip,
+  Box,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 
+const NAV_LINKS = [
+  { label: "Home", href: "#" },
+  { label: "About", href: "#about" },
+  { label: "Weddings", href: "#weddings" },
+  { label: "Corporate", href: "#corporate" },
+  { label: "Parties", href: "#celebrations" },
+  { label: "Production", href: "#production" },
+  { label: "Contact", href: "#contact" },
+];
 
+export default function AppBar() {
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-const ResponsiveAppBar = () => {
-  
+  const handleDrawerToggle = () => setMobileOpen((prev) => !prev);
+
+  const navContent = (
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        gap: { xs: 0, md: 1 },
+        flexWrap: "wrap",
+      }}
+    >
+      {NAV_LINKS.map(({ label, href }) => (
+        <Typography
+          key={label}
+          component="a"
+          href={href}
+          variant="body2"
+          sx={{
+            color: "inherit",
+            textDecoration: "none",
+            textTransform: "uppercase",
+            letterSpacing: "0.15em",
+            px: { md: 1.5 },
+            py: 1,
+            "&:hover": {
+              color: "primary.main",
+            },
+          }}
+        >
+          {label}
+        </Typography>
+      ))}
+    </Box>
+  );
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: 'transparent', backgroundImage: 'none' }}>
-      <Container maxWidth={false}>
-        <Toolbar disableGutters sx={{ justifyContent: 'center', backgroundColor: 'transparent' }}>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
+    <>
+      <MuiAppBar position="sticky" elevation={0}>
+        <Toolbar
+          sx={{
+            justifyContent: "space-between",
+            minHeight: { xs: 56, sm: 64 },
+            px: { xs: 1, sm: 2 },
+          }}
+        >
+          <Box
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="#"
             sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              display: "flex",
+              alignItems: "center",
+              textDecoration: "none",
+              color: "inherit",
             }}
           >
-            Wirth_It Music
-          </Typography>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Wirth_It Music
-          </Typography>
+            <Box
+              component="img"
+              src="/logo.png"
+              alt="Wirth_It Music"
+              sx={{
+                height: { xs: 40, sm: 48 },
+                width: "auto",
+                display: "block",
+              }}
+            />
+          </Box>
+
+          <Box sx={{ display: { xs: "none", md: "block" } }}>{navContent}</Box>
+
+          <Tooltip title="Open menu">
+            <IconButton
+              color="inherit"
+              aria-label="open menu"
+              onClick={handleDrawerToggle}
+              sx={{ display: { md: "none" } }}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Tooltip>
         </Toolbar>
-      </Container>
-    </AppBar>
+      </MuiAppBar>
+
+      <Drawer
+        variant="temporary"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{ keepMounted: true }}
+        sx={{
+          display: { xs: "block", md: "none" },
+          "& .MuiDrawer-paper": {
+            width: 280,
+            boxSizing: "border-box",
+            bgcolor: "background.default",
+            borderLeft: "1px solid",
+            borderColor: "divider",
+          },
+        }}
+      >
+        <Box sx={{ py: 2, px: 2, display: "flex", justifyContent: "flex-end" }}>
+          <Tooltip title="Close menu">
+            <IconButton
+              onClick={handleDrawerToggle}
+              color="inherit"
+              size="large"
+              aria-label="close menu"
+            >
+              <CloseIcon />
+            </IconButton>
+          </Tooltip>
+        </Box>
+        <List>
+          {NAV_LINKS.map(({ label, href }) => (
+            <ListItem key={label} disablePadding>
+              <ListItemButton
+                component="a"
+                href={href}
+                onClick={handleDrawerToggle}
+                sx={{
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                }}
+              >
+                <ListItemText primary={label} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+    </>
   );
 }
-export default ResponsiveAppBar;
