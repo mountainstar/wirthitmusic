@@ -30,14 +30,14 @@ export default function MailingList() {
             letterSpacing: "0.04em",
           }}
         >
-          Join our mailing list for the latest news
+          Stay in the loop
         </Typography>
         <Typography
           variant="body2"
           color="text.secondary"
           sx={{ textAlign: "center", mb: 3 }}
         >
-          Sign up for tour dates, releases and updates.
+          Get updates on availability, promotions, and event ideas.
         </Typography>
         {submitted ? (
           <Alert severity="success" sx={{ justifyContent: "center" }}>

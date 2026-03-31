@@ -9,36 +9,44 @@ import {
 } from "@mui/material";
 
 const PLACEHOLDERS = {
-  merch: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
-  vinyl: "https://images.unsplash.com/photo-1611339555312-e607a835f912?w=800&q=80",
-  tour: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80",
-  discography: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80",
+  weddings:
+    "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&q=80",
+  corporate:
+    "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
+  celebrations:
+    "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=80",
+  production:
+    "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80",
 };
 
 const sections = [
   {
-    id: "merch",
-    title: "Merchandise",
-    subtitle: "Official Online Store",
-    image: PLACEHOLDERS.merch,
+    id: "weddings",
+    title: "Weddings",
+    subtitle: "Receptions & ceremonies",
+    image: PLACEHOLDERS.weddings,
+    imageAlt: "Wedding celebration with guests",
   },
   {
-    id: "music",
-    title: "Vinyl Sessions",
-    subtitle: "Music & Mixes",
-    image: PLACEHOLDERS.vinyl,
+    id: "corporate",
+    title: "Corporate",
+    subtitle: "Galas, launches & holiday parties",
+    image: PLACEHOLDERS.corporate,
+    imageAlt: "Corporate event venue with seating",
   },
   {
-    id: "tour",
-    title: "Tour Dates",
-    subtitle: "& Tickets",
-    image: PLACEHOLDERS.tour,
+    id: "celebrations",
+    title: "Private parties",
+    subtitle: "Birthdays & milestones",
+    image: PLACEHOLDERS.celebrations,
+    imageAlt: "Colorful birthday party balloons and cake",
   },
   {
-    id: "discography",
-    title: "Discography",
-    subtitle: "Releases & Labels",
-    image: PLACEHOLDERS.discography,
+    id: "production",
+    title: "Sound & experience",
+    subtitle: "Production & lighting support",
+    image: PLACEHOLDERS.production,
+    imageAlt: "Concert stage lighting and crowd",
   },
 ] as const;
 
@@ -52,7 +60,7 @@ export default function SectionCards() {
       }}
     >
       <Grid container spacing={3} sx={{ maxWidth: 1400, mx: "auto" }}>
-        {sections.map(({ id, title, subtitle, image }) => (
+        {sections.map(({ id, title, subtitle, image, imageAlt }) => (
           <Grid key={id} size={{ xs: 12, sm: 6, md: 6 }} id={id}>
             <Card
               elevation={0}
@@ -78,7 +86,7 @@ export default function SectionCards() {
                   component="img"
                   height="240"
                   image={image}
-                  alt=""
+                  alt={imageAlt}
                   sx={{
                     objectFit: "cover",
                     filter: "grayscale(20%)",

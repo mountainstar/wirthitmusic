@@ -3,7 +3,7 @@ import { ParallaxBanner } from "react-scroll-parallax";
 import type { BannerLayer } from "react-scroll-parallax/dist/components/ParallaxBanner/types";
 
 const PLACEHOLDER_HERO =
-  "https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=1920&q=80";
+  "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1920&q=80";
 
 export default function Hero() {
   const background: BannerLayer = {
@@ -59,7 +59,7 @@ export default function Hero() {
             mb: 1,
           }}
         >
-          Welcome
+          DJ & event services
         </Typography>
         <Typography
           variant="h1"
@@ -80,13 +80,13 @@ export default function Hero() {
             color: "grey.300",
             fontWeight: 400,
             mt: 2,
-            maxWidth: "560px",
-            fontStyle: "italic",
+            maxWidth: "620px",
+            fontStyle: "normal",
             textShadow: "0 1px 12px rgba(0,0,0,0.6)",
           }}
         >
-          “The rave was built on energy and the excitement of it all — get lost in the
-          sound.”
+          Professional sound and mixing for weddings, corporate events, and private
+          celebrations — tailored to your crowd and your vibe.
         </Typography>
       </Box>
     ),

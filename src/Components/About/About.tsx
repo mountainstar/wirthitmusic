@@ -1,7 +1,7 @@
 import { Box, Container, Typography } from "@mui/material";
 
 const PLACEHOLDER_PORTRAIT =
-  "https://images.unsplash.com/photo-1571266028243-d220e8d2d420?w=600&q=80";
+  "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&q=80";
 
 export default function About() {
   return (
@@ -28,7 +28,7 @@ export default function About() {
           <Box
             component="img"
             src={PLACEHOLDER_PORTRAIT}
-            alt=""
+            alt="Energetic live event with stage lights"
             sx={{
               width: "100%",
               maxWidth: 400,
@@ -50,15 +50,17 @@ export default function About() {
               About
             </Typography>
             <Typography variant="h4" sx={{ mb: 2, letterSpacing: "0.02em" }}>
-              The home of all things Wirth_It Music
+              Event DJ & production for memorable nights
             </Typography>
             <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
-              News, tour dates and music. This is the digital hub for the sound — a place
-              to get lost in the energy and excitement of the rave.
+              Wirth_It Music is built around one thing: helping you host an event people
+              talk about long after the last song. From ceremony to last dance, we bring
+              polished MCing, seamless mixes, and sound that fits the room.
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Iconic sounds and a lasting legacy. From the studio to the stage, the
-              mission is simple: move the crowd and keep the party alive.
+              Whether it is a wedding reception, a company gala, or a milestone birthday,
+              we work with you on timeline, genre, and energy so the dance floor stays
+              full and the night feels effortless.
             </Typography>
           </Box>
         </Box>

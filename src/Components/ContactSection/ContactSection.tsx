@@ -36,11 +36,12 @@ export default function ContactSection() {
     >
       <Container maxWidth="sm">
         <Typography variant="h5" sx={{ mb: 1, letterSpacing: "0.04em" }}>
-          Contact
+          Get a quote
         </Typography>
         <Divider sx={{ width: "60px", mb: 3, borderColor: "primary.main" }} />
         <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
-          Drop us a line. (No API connected — placeholder.)
+          Tell us about your date, venue, and vibe — we will follow up with next steps.
+          (No API connected — placeholder.)
         </Typography>
         {submitted ? (
           <Alert severity="success">

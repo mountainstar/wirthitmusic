@@ -18,9 +18,10 @@ import CloseIcon from "@mui/icons-material/Close";
 const NAV_LINKS = [
   { label: "Home", href: "#" },
   { label: "About", href: "#about" },
-  { label: "Music", href: "#music" },
-  { label: "Tour", href: "#tour" },
-  { label: "Shop", href: "#merch" },
+  { label: "Weddings", href: "#weddings" },
+  { label: "Corporate", href: "#corporate" },
+  { label: "Parties", href: "#celebrations" },
+  { label: "Production", href: "#production" },
   { label: "Contact", href: "#contact" },
 ];
 
