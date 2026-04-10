@@ -1,13 +1,14 @@
 import { Box, Tooltip } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 
 const FOOTER_LINKS = [
-  { label: "About", href: "#about" },
-  { label: "Weddings", href: "#weddings" },
-  { label: "Corporate", href: "#corporate" },
-  { label: "Parties", href: "#celebrations" },
-  { label: "Production", href: "#production" },
-  { label: "Contact", href: "#contact" },
-];
+  { label: "About", to: "/#about" },
+  { label: "Weddings", to: "/weddings" },
+  { label: "Corporate", to: "/corporate" },
+  { label: "Parties", to: "/parties" },
+  { label: "Production", to: "/production" },
+  { label: "Contact", to: "/#contact" },
+] as const;
 
 const SOCIAL_LINKS = [
   {
@@ -61,11 +62,11 @@ export default function Footer() {
         }}
       >
         <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-          {FOOTER_LINKS.map(({ label, href }) => (
+          {FOOTER_LINKS.map(({ label, to }) => (
             <Box
               key={label}
-              component="a"
-              href={href}
+              component={RouterLink}
+              to={to}
               sx={{
                 color: "text.primary",
                 textDecoration: "none",

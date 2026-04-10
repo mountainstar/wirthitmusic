@@ -16,6 +16,9 @@ const schema = yup.object().shape({
   message: yup.string().required("Message is required"),
 });
 
+const RECAPTCHA_SITE_KEY = (import.meta.env.VITE_RECAPTCHA_SITE_KEY ?? "").trim();
+const USE_RECAPTCHA = RECAPTCHA_SITE_KEY.length > 0;
+
 const ContactForm: FC<IProps> = (props) => {
   const [recaptchaValue, setRecaptchaValue] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -32,7 +35,7 @@ const ContactForm: FC<IProps> = (props) => {
   });
 
   const onSubmit = async (data: any) => {
-    if (!recaptchaValue) {
+    if (USE_RECAPTCHA && !recaptchaValue) {
       alert("Please verify you are not a robot");
       return;
     }
@@ -41,19 +44,14 @@ const ContactForm: FC<IProps> = (props) => {
     setSubmitSuccess(false);
 
     try {
-      const result = await sendEmail({
+      await sendEmail({
         name: data.name,
         email: data.email,
         message: data.message,
       });
-
-      if (result && !(result instanceof Error)) {
-        setSubmitSuccess(true);
-        reset();
-        setRecaptchaValue(null);
-      } else {
-        setSubmitError("Failed to send message. Please try again later.");
-      }
+      setSubmitSuccess(true);
+      reset();
+      setRecaptchaValue(null);
     } catch (error: any) {
       console.error("Email sending error:", error);
       setSubmitError(error.message || "Failed to send message. Please try again later.");
@@ -98,21 +96,23 @@ const ContactForm: FC<IProps> = (props) => {
               helperText={errors.message?.message as string}
               fullWidth
             />
-            <Box sx={{ my: 2 }}>
-              <Box
-                id="recaptcha-container"
-                sx={{ display: "flex", justifyContent: "center" }}
-              >
-                <ReCAPTCHA
-                  sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY ?? ""}
-                  onChange={(value: any) => {
-                    setRecaptchaValue(value);
-                  }}
-                />
+            {USE_RECAPTCHA ? (
+              <Box sx={{ my: 2 }}>
+                <Box
+                  id="recaptcha-container"
+                  sx={{ display: "flex", justifyContent: "center" }}
+                >
+                  <ReCAPTCHA
+                    sitekey={RECAPTCHA_SITE_KEY}
+                    onChange={(value: string | null) => {
+                      setRecaptchaValue(value);
+                    }}
+                  />
+                </Box>
               </Box>
-            </Box>
+            ) : null}
             <Button
-              disabled={!recaptchaValue || submitting}
+              disabled={(USE_RECAPTCHA && !recaptchaValue) || submitting}
               type="submit"
               variant="contained"
               color="primary"

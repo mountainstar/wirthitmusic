@@ -4,13 +4,13 @@ import Footer from "../Footer";
 import AppBar from "../AppBar";
 import Hero from "../Hero";
 
-type PageWrapperProps = { children: ReactNode };
+type PageWrapperProps = { children: ReactNode; showHero?: boolean };
 
-export default function PageWrapper({ children }: PageWrapperProps) {
+export default function PageWrapper({ children, showHero = true }: PageWrapperProps) {
   return (
     <>
       <AppBar />
-      <Hero />
+      {showHero ? <Hero /> : null}
       <Container maxWidth={false} disableGutters>
         {children}
       </Container>

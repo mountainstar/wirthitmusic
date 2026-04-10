@@ -1,80 +1,93 @@
-import { SendEmailCommand } from "@aws-sdk/client-ses";
-import { sesClient } from "../libs/sesClient";
-
 interface EmailData {
   name: string;
   email: string;
   message: string;
 }
 
-const createSendEmailCommand = (
-  toAddress: string,
-  fromAddress: string,
-  emailData: EmailData
-) => {
-  const htmlBody = `
-    <html>
-      <body>
-        <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${emailData.name}</p>
-        <p><strong>Email:</strong> ${emailData.email}</p>
-        <p><strong>Message:</strong></p>
-        <p>${emailData.message.replace(/\n/g, "<br>")}</p>
-      </body>
-    </html>
-  `;
+type SubscribeStatus = "subscribed" | "already_subscribed";
 
-  const textBody = `
-New Contact Form Submission
+interface SubscribeResponse {
+  ok?: boolean;
+  status?: SubscribeStatus;
+}
 
-Name: ${emailData.name}
-Email: ${emailData.email}
-Message: ${emailData.message}
-  `;
+interface BlastPayload {
+  subject: string;
+  message: string;
+  adminKey: string;
+}
 
-  return new SendEmailCommand({
-    Destination: {
-      ToAddresses: [toAddress],
-      CcAddresses: [],
-    },
-    Message: {
-      Body: {
-        Html: {
-          Charset: "UTF-8",
-          Data: htmlBody,
-        },
-        Text: {
-          Charset: "UTF-8",
-          Data: textBody,
-        },
-      },
-      Subject: {
-        Charset: "UTF-8",
-        Data: `New Contact Form Submission from ${emailData.name}`,
-      },
-    },
-    Source: fromAddress,
-    ReplyToAddresses: [emailData.email],
+function getMailApiBaseUrl(): string {
+  const baseUrl = import.meta.env.VITE_MAIL_API_BASE_URL?.trim();
+  if (!baseUrl) {
+    throw new Error("Mail API is not configured. Set VITE_MAIL_API_BASE_URL.");
+  }
+  return baseUrl.endsWith("/") ? baseUrl.slice(0, -1) : baseUrl;
+}
+
+export async function sendEmail(emailData: EmailData): Promise<void> {
+  const response = await fetch(`${getMailApiBaseUrl()}/contact`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(emailData),
   });
-};
 
-export const sendEmail = async (emailData: EmailData) => {
-  const toAddress = import.meta.env.VITE_SES_TO_EMAIL ?? "";
-  const fromAddress = import.meta.env.VITE_SES_FROM_EMAIL ?? "";
+  if (!response.ok) {
+    throw new Error("Failed to send message. Please try again later.");
+  }
+}
 
-  if (!toAddress || !fromAddress) {
-    throw new Error("Email addresses not configured");
+export async function subscribeEmail(email: string): Promise<SubscribeStatus> {
+  const response = await fetch(`${getMailApiBaseUrl()}/subscribe`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to sign up. Please try again later.");
   }
 
-  const sendEmailCommand = createSendEmailCommand(toAddress, fromAddress, emailData);
-
-  try {
-    return await sesClient.send(sendEmailCommand);
-  } catch (caught) {
-    if (caught instanceof Error && caught.name === "MessageRejected") {
-      const messageRejectedError = caught;
-      return messageRejectedError;
-    }
-    throw caught;
+  const payload = (await response.json()) as SubscribeResponse;
+  if (payload.status === "already_subscribed") {
+    return "already_subscribed";
   }
-};
+  return "subscribed";
+}
+
+export async function sendBlastEmail(payload: BlastPayload): Promise<{
+  total: number;
+  sent: number;
+  failed: number;
+}> {
+  const response = await fetch(`${getMailApiBaseUrl()}/blast`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-admin-key": payload.adminKey,
+    },
+    body: JSON.stringify({
+      subject: payload.subject,
+      message: payload.message,
+    }),
+  });
+
+  if (response.status === 401) {
+    throw new Error("Unauthorized: check your admin key.");
+  }
+
+  if (!response.ok) {
+    throw new Error("Failed to send blast. Please try again later.");
+  }
+
+  const result = (await response.json()) as {
+    total?: number;
+    sent?: number;
+    failed?: number;
+  };
+  return {
+    total: result.total ?? 0,
+    sent: result.sent ?? 0,
+    failed: result.failed ?? 0,
+  };
+}

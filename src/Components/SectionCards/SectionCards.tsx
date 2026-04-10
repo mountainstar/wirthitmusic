@@ -1,3 +1,4 @@
+import { Link as RouterLink } from "react-router-dom";
 import {
   Box,
   Card,
@@ -22,6 +23,7 @@ const PLACEHOLDERS = {
 const sections = [
   {
     id: "weddings",
+    to: "/weddings",
     title: "Weddings",
     subtitle: "Receptions & ceremonies",
     image: PLACEHOLDERS.weddings,
@@ -29,6 +31,7 @@ const sections = [
   },
   {
     id: "corporate",
+    to: "/corporate",
     title: "Corporate",
     subtitle: "Galas, launches & holiday parties",
     image: PLACEHOLDERS.corporate,
@@ -36,6 +39,7 @@ const sections = [
   },
   {
     id: "celebrations",
+    to: "/parties",
     title: "Private parties",
     subtitle: "Birthdays & milestones",
     image: PLACEHOLDERS.celebrations,
@@ -43,6 +47,7 @@ const sections = [
   },
   {
     id: "production",
+    to: "/production",
     title: "Sound & experience",
     subtitle: "Production & lighting support",
     image: PLACEHOLDERS.production,
@@ -60,7 +65,7 @@ export default function SectionCards() {
       }}
     >
       <Grid container spacing={3} sx={{ maxWidth: 1400, mx: "auto" }}>
-        {sections.map(({ id, title, subtitle, image, imageAlt }) => (
+        {sections.map(({ id, to, title, subtitle, image, imageAlt }) => (
           <Grid key={id} size={{ xs: 12, sm: 6, md: 6 }} id={id}>
             <Card
               elevation={0}
@@ -78,9 +83,9 @@ export default function SectionCards() {
               }}
             >
               <CardActionArea
-                component="div"
-                onClick={() => {}}
-                sx={{ display: "block" }}
+                component={RouterLink}
+                to={to}
+                sx={{ display: "block", color: "inherit", textDecoration: "none" }}
               >
                 <CardMedia
                   component="img"

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
 import {
   AppBar as MuiAppBar,
   Toolbar,
@@ -16,14 +17,14 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 
 const NAV_LINKS = [
-  { label: "Home", href: "#" },
-  { label: "About", href: "#about" },
-  { label: "Weddings", href: "#weddings" },
-  { label: "Corporate", href: "#corporate" },
-  { label: "Parties", href: "#celebrations" },
-  { label: "Production", href: "#production" },
-  { label: "Contact", href: "#contact" },
-];
+  { label: "Home", to: "/" },
+  { label: "About", to: "/#about" },
+  { label: "Weddings", to: "/weddings" },
+  { label: "Corporate", to: "/corporate" },
+  { label: "Parties", to: "/parties" },
+  { label: "Production", to: "/production" },
+  { label: "Contact", to: "/#contact" },
+] as const;
 
 export default function AppBar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -39,11 +40,11 @@ export default function AppBar() {
         flexWrap: "wrap",
       }}
     >
-      {NAV_LINKS.map(({ label, href }) => (
+      {NAV_LINKS.map(({ label, to }) => (
         <Typography
           key={label}
-          component="a"
-          href={href}
+          component={RouterLink}
+          to={to}
           variant="body2"
           sx={{
             color: "inherit",
@@ -74,8 +75,8 @@ export default function AppBar() {
           }}
         >
           <Box
-            component="a"
-            href="#"
+            component={RouterLink}
+            to="/"
             sx={{
               display: "flex",
               alignItems: "center",
@@ -139,11 +140,11 @@ export default function AppBar() {
           </Tooltip>
         </Box>
         <List>
-          {NAV_LINKS.map(({ label, href }) => (
+          {NAV_LINKS.map(({ label, to }) => (
             <ListItem key={label} disablePadding>
               <ListItemButton
-                component="a"
-                href={href}
+                component={RouterLink}
+                to={to}
                 onClick={handleDrawerToggle}
                 sx={{
                   textTransform: "uppercase",
