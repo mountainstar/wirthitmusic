@@ -53,6 +53,15 @@ const sections = [
     image: PLACEHOLDERS.production,
     imageAlt: "Concert stage lighting and crowd",
   },
+  {
+    id: "profile",
+    to: "/profile",
+    title: "Mixes & video",
+    subtitle: "SoundCloud & YouTube",
+    image:
+      "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=80",
+    imageAlt: "DJ decks and mixer in low light",
+  },
 ] as const;
 
 export default function SectionCards() {

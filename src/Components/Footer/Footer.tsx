@@ -3,6 +3,7 @@ import { Link as RouterLink } from "react-router-dom";
 
 const FOOTER_LINKS = [
   { label: "About", to: "/#about" },
+  { label: "Profile", to: "/profile" },
   { label: "Weddings", to: "/weddings" },
   { label: "Corporate", to: "/corporate" },
   { label: "Parties", to: "/parties" },

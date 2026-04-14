@@ -19,6 +19,7 @@ import CloseIcon from "@mui/icons-material/Close";
 const NAV_LINKS = [
   { label: "Home", to: "/" },
   { label: "About", to: "/#about" },
+  { label: "Profile", to: "/profile" },
   { label: "Weddings", to: "/weddings" },
   { label: "Corporate", to: "/corporate" },
   { label: "Parties", to: "/parties" },
