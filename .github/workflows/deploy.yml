@@ -27,6 +27,11 @@ jobs:
         run: npm ci
 
       - name: Build
+        env:
+          VITE_MAIL_API_BASE_URL: ${{ secrets.VITE_MAIL_API_BASE_URL }}
+          VITE_RECAPTCHA_SITE_KEY: ${{ secrets.VITE_RECAPTCHA_SITE_KEY }}
+          VITE_YOUTUBE_API_KEY: ${{ secrets.VITE_YOUTUBE_API_KEY }}
+          VITE_YOUTUBE_CHANNEL_ID: ${{ secrets.VITE_YOUTUBE_CHANNEL_ID }}
         run: npm run build
 
       - name: Configure AWS credentials

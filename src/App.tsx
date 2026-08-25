@@ -8,6 +8,7 @@ import Home from "./Home";
 import AdminBlastPage from "./AdminBlastPage";
 import ProfilePage from "./pages/ProfilePage";
 import ServiceInfoPage from "./pages/ServiceInfoPage";
+import EquipmentAgreementPage from "./pages/EquipmentAgreementPage";
 import ScrollToHash from "./Components/ScrollToHash";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
             <Route path="/parties" element={<ServiceInfoPage serviceId="parties" />} />
             <Route path="/production" element={<ServiceInfoPage serviceId="production" />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/equipment-agreement" element={<EquipmentAgreementPage />} />
             <Route path="/admin/blast" element={<AdminBlastPage />} />
           </Routes>
         </Router>

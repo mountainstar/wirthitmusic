@@ -4,6 +4,18 @@ interface EmailData {
   message: string;
 }
 
+export interface EquipmentAgreementPayload {
+  event: string;
+  eventDate: string;
+  venue: string;
+  djName: string;
+  contact: string;
+  djPrintName: string;
+  djSignatureDate: string;
+  djSignatureDataUrl: string;
+  agreedToTerms: boolean;
+}
+
 type SubscribeStatus = "subscribed" | "already_subscribed";
 
 interface SubscribeResponse {
@@ -35,6 +47,23 @@ export async function sendEmail(emailData: EmailData): Promise<void> {
   if (!response.ok) {
     throw new Error("Failed to send message. Please try again later.");
   }
+}
+
+export async function submitEquipmentAgreement(
+  payload: EquipmentAgreementPayload,
+): Promise<{ id: string }> {
+  const response = await fetch(`${getMailApiBaseUrl()}/equipment-agreement`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to submit agreement. Please try again later.");
+  }
+
+  const result = (await response.json()) as { id?: string };
+  return { id: result.id ?? "" };
 }
 
 export async function subscribeEmail(email: string): Promise<SubscribeStatus> {
