@@ -12,3 +12,6 @@ export const PROFILE_SOUNDCLOUD_TRACK_URLS: string[] = [
 export const PROFILE_YOUTUBE_VIDEO_IDS: string[] = [
   // "dQw4w9WgXcQ",
 ];
+
+// Wirth_it channel: https://www.youtube.com/@Wirth_it
+export const PROFILE_YOUTUBE_CHANNEL_ID = "UCex7epU9ySQqN5dy34gLz8Q";

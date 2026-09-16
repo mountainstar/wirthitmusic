@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { PROFILE_YOUTUBE_VIDEO_IDS } from "../config/profileMedia";
+import { PROFILE_YOUTUBE_CHANNEL_ID, PROFILE_YOUTUBE_VIDEO_IDS } from "../config/profileMedia";
 
 type State = { videoIds: string[]; loading: boolean; error: string | null };
 
@@ -14,7 +14,8 @@ function uploadsPlaylistIdFromChannelId(channelId: string): string | null {
 
 function resolvePlaylistId(): string {
   const playlistFromEnv = import.meta.env.VITE_YOUTUBE_PLAYLIST_ID?.trim();
-  const channelId = import.meta.env.VITE_YOUTUBE_CHANNEL_ID?.trim();
+  const channelId =
+    import.meta.env.VITE_YOUTUBE_CHANNEL_ID?.trim() || PROFILE_YOUTUBE_CHANNEL_ID;
   return (
     playlistFromEnv ||
     (channelId ? uploadsPlaylistIdFromChannelId(channelId) ?? "" : "")

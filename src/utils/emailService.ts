@@ -5,11 +5,14 @@ interface EmailData {
 }
 
 export interface EquipmentAgreementPayload {
+  agreementType: "use" | "borrow";
   event: string;
   eventDate: string;
   venue: string;
   djName: string;
   contact: string;
+  returnDate?: string;
+  equipmentList?: string;
   djPrintName: string;
   djSignatureDate: string;
   djSignatureDataUrl: string;
